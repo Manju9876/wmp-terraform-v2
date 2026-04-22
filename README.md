@@ -1,1 +1,1 @@
-# wmp-terraform-v2
+# wmp-terraform
