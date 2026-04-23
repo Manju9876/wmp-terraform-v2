@@ -20,3 +20,6 @@ component_name = {
     instance_type = "t3.small"
   }
 }
+
+zone_id = "Z08819072319VLT801BHA"
+env = "dev"

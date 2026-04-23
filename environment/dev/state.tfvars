@@ -1,3 +1,3 @@
-bucket = "my_storage"
-key    = "terraform/state"
+bucket = "terraform_data"
+key    = "env-dev/state"
 region = "us-east-1"
