@@ -21,5 +21,5 @@ component_name = {
   }
 }
 
-zone_id = "Z08819072319VLT801BHA"
+zone_id = "Z05223503AKZQ62GRN3AQ"
 env = "dev"
