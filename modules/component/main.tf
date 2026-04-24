@@ -16,6 +16,10 @@ resource "aws_security_group" "main" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+
+  tags = {
+    Name = "${var.component_name}-${var.env}"
+  }
 }
 
 resource "aws_instance" "main" {
