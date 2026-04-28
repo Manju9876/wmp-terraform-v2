@@ -61,7 +61,7 @@ resource "null_resource" "ansible_code" {
 
     inline = [
       "sudo python3.11 -m pip install ansible hvac",
-      "ansible-pull -i localhost, -U https://github.com/Manju9876/wmp-ansible roboshop.yaml -e component_name=${var.component_name} -e env=${var.env}"
+      "ansible-pull -i localhost, -U https://github.com/Manju9876/wmp-ansible wmp.yaml.yaml -e component_name=${var.component_name} -e env=${var.env}"
     ]
   }
 }
