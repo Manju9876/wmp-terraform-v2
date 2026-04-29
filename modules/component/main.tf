@@ -46,7 +46,7 @@ resource "aws_route53_record" "main" {
 }
 
 resource "null_resource" "ansible_code" {
- depends_on = [aws_route53_record.main]
+# depends_on = [aws_route53_record.main]
 
   triggers = {
     instance_id_change = aws_instance.main.id
