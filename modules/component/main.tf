@@ -1,31 +1,36 @@
 resource "aws_security_group" "main" {
+
   name = "${var.component_name}-${var.env}"
 
-  ingress{
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+  dynamic "ingress" {
+    for_each = var.ports
+
+    content {
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+     }
   }
-
   tags = {
     Name = "${var.component_name}-${var.env}"
-  }
 }
+
+
+
 
 resource "aws_instance" "main" {
   depends_on = [aws_security_group.main]
 
-  ami           = var.ami_id
+  ami           = data.aws_ami.ami.id
   instance_type = var.instance_type
   vpc_security_group_ids = [aws_security_group.main.id]
 
@@ -35,7 +40,7 @@ resource "aws_instance" "main" {
 }
 
 resource "aws_route53_record" "main" {
-  zone_id = var.zone_id
+  zone_id = data.aws_route53_zone.main.zone_id
   name    = "${var.component_name}-${var.env}"
   type    = "A"
   ttl     = 30
